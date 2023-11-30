@@ -1,6 +1,6 @@
 import axios from "axios"
 import { put, takeEvery } from "redux-saga/effects"
-import { setUser, setUserError } from "../reducers/userReducer"
+import { setUsers, setUserError } from "../reducers/userReducer"
 import { UserActionTypes } from "../../types/user"
 import { callTs } from "../../shared/custom-effects"
 
@@ -9,7 +9,7 @@ const fetchUserFromApi = () => axios.get('https://jsonplaceholder.typicode.com/u
 function* fetchUserWorker(): Generator<any> {
     try{
         const { data }:any = yield callTs(fetchUserFromApi)
-        yield put(setUser(data))
+        yield put(setUsers(data))
     }catch(e){
         if(axios.isAxiosError(e)){
             yield put(setUserError(e.message))

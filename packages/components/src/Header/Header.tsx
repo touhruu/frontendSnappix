@@ -1,3 +1,5 @@
+import { Avatar } from '@mui/material';
+import { FC, ForwardRefExoticComponent, ReactElement } from 'react';
 import {
   HeaderItem,
   HeaderItemWrapper,
@@ -9,21 +11,33 @@ import {
   UserControlPanel,
 } from './Header.style';
 import { FontsGlobalStyle } from '../global.style';
-import { Avatar } from '@mui/material';
 
-export const Header = () => {
+interface IHeaderProps {
+  menuItem: ForwardRefExoticComponent<any>;
+  menuItemList: { title: string; url: string }[];
+}
+
+export const Header: FC<IHeaderProps> = ({ menuItem, menuItemList }) => {
+  const MenuItem = menuItem;
   return (
     <HeaderWrapper>
       <FontsGlobalStyle />
       {/* <HeaderItem>Пункт меню</HeaderItem> */}
       <HeaderItemWrapper>
         <LogoWrapper>
-          <Picture src="./images/logo.svg"></Picture>
+          <Picture src="/images/logo.svg"></Picture>
           <LogoTitle>Snappix</LogoTitle>
         </LogoWrapper>
       </HeaderItemWrapper>
       <HeaderItemWrapper>
-        <HeaderItem>
+        {menuItemList.map((item) => (
+          <MenuItem to={item.url}>
+            <HeaderItem>
+              <Picture src="/images/home.svg"></Picture>
+            </HeaderItem>
+          </MenuItem>
+        ))}
+        {/* <HeaderItem>
           <Picture src="./images/home.svg"></Picture>
         </HeaderItem>
         <HeaderItem>
@@ -34,7 +48,7 @@ export const Header = () => {
         </HeaderItem>
         <HeaderItem>
           <Picture src="./images/followers.svg"></Picture>
-        </HeaderItem>
+        </HeaderItem> */}
       </HeaderItemWrapper>
       <HeaderItemWrapper>
         <UserControlPanel>

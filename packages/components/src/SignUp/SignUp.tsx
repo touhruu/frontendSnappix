@@ -8,34 +8,35 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import { IAuthData } from '../types/auth';
-import { schema } from '../Schemas/CreateAuthSchemas';
+import { schema } from '../Schemas/CreateRegistrationSchemas';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Copyright } from '@mui/icons-material';
 import { FC, memo } from 'react';
+import { IRegistrationData } from '../types/registration';
 
-interface ISignInProps {
+interface ISignUpProps {
   switchForm: () => void;
-  onSignInSubmit: (data: IAuthData) => void;
+  onSignUpSubmit: (data: IRegistrationData) => void;
 }
 
-export const SignIn: FC<ISignInProps> = memo(
-  ({ switchForm, onSignInSubmit }) => {
+export const SignUp: FC<ISignUpProps> = memo(
+  ({ switchForm, onSignUpSubmit }) => {
     const {
       register,
       handleSubmit,
       formState: { errors },
-    } = useForm<IAuthData>({ resolver: schema });
+    } = useForm<IRegistrationData>({ resolver: schema });
 
-    const onSubmit: SubmitHandler<IAuthData> = (data) => {
-      onSignInSubmit(data);
+    const onSubmit: SubmitHandler<IRegistrationData> = (data) => {
+      onSignUpSubmit(data);
+      console.log(data);
     };
 
     return (
       <Box boxShadow={3} sx={{ maxWidth: '400px', height: '100%' }}>
         <Box
           sx={{
-            my: 8,
+            my: 2,
             mx: 4,
             display: 'flex',
             flexDirection: 'column',
@@ -46,7 +47,7 @@ export const SignIn: FC<ISignInProps> = memo(
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Авторизация
+            Регистрация
           </Typography>
           <Box
             component="form"
@@ -64,6 +65,17 @@ export const SignIn: FC<ISignInProps> = memo(
               autoFocus
               {...register('email')}
               helperText={errors.email?.message}
+            />
+            <TextField
+              error={!!errors.login}
+              margin="normal"
+              fullWidth
+              id="login"
+              label="Введите логин"
+              autoComplete="login"
+              autoFocus
+              {...register('login')}
+              helperText={errors.login?.message}
             />
             <TextField
               error={!!errors.password}
@@ -86,7 +98,7 @@ export const SignIn: FC<ISignInProps> = memo(
               variant="contained"
               sx={{ mt: 2, mb: 2 }}
             >
-              Войти
+              Регистрация
             </Button>
             <Box flexDirection={'column'}>
               <Box justifyContent={'center'} sx={{ width: '100%' }}>
@@ -96,7 +108,7 @@ export const SignIn: FC<ISignInProps> = memo(
               </Box>
               <Grid item>
                 <Link href="#" variant="body2" onClick={switchForm}>
-                  {'У вас нет учетной записи? Регистрация'}
+                  {'У уже есть учетная запись? Вход'}
                 </Link>
               </Grid>
             </Box>

@@ -1,20 +1,29 @@
-import { useEffect } from "react"
-import { useTypedSelector } from "../hooks/useTypedSelector"
 import { useDispatch } from "react-redux"
+import { AuthForm, IAuthData, IRegistrationData } from "@snappix/components";
+import { Box } from "@mui/material";
+import { fetchSignIn, fetchSignUp } from "../store/reducers/authReducer";
 
 export const AuthPage = () => {
     const dispatch = useDispatch()
-    const { users, error, loading } = useTypedSelector(state => state.user)
 
-    useEffect(() => {
-        dispatch({ type: "FETCH_USERS" })
-    }, [])
+    const onSignInSubmit = (data: IAuthData) => {
+        dispatch(fetchSignIn(data));
+        console.log(1111)
+    }
+
+    const onSignUpSubmit = (data: IRegistrationData) => {
+        dispatch(fetchSignUp(data));
+    }
 
     return (
-        <div>
-        {users.map(user => (
-            <div>{ user.name }</div>
-        ))
-        }</div>
+        <Box sx={{
+            display: 'flex',
+            height: '100vh',
+            justifyContent: "center",
+            alignItems: 'center',
+        }}>
+            <AuthForm onSignInSubmit={onSignInSubmit} onSignUpSubmit={onSignUpSubmit} />
+        </Box>
+
     )
 }
