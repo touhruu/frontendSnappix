@@ -1,3 +1,5 @@
+import { FC, memo } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -9,9 +11,6 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { schema } from '../Schemas/CreateRegistrationSchemas';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { Copyright } from '@mui/icons-material';
-import { FC, memo } from 'react';
 import { IRegistrationData } from '../types/registration';
 
 interface ISignUpProps {
@@ -33,7 +32,10 @@ export const SignUp: FC<ISignUpProps> = memo(
     };
 
     return (
-      <Box boxShadow={3} sx={{ maxWidth: '400px', height: '100%' }}>
+      <Box
+        boxShadow={3}
+        sx={{ maxWidth: '400px', height: '100%', bgcolor: 'white' }}
+      >
         <Box
           sx={{
             my: 2,
@@ -112,7 +114,6 @@ export const SignUp: FC<ISignUpProps> = memo(
                 </Link>
               </Grid>
             </Box>
-            <Copyright sx={{ mt: 2 }} />
           </Box>
         </Box>
       </Box>

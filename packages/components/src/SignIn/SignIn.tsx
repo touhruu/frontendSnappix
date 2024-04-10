@@ -1,3 +1,5 @@
+import { FC, memo } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -6,13 +8,12 @@ import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import { ThemeProvider } from '@mui/material/styles';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { IAuthData } from '../types/auth';
 import { schema } from '../Schemas/CreateAuthSchemas';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { Copyright } from '@mui/icons-material';
-import { FC, memo } from 'react';
+import { theme } from '../theme';
 
 interface ISignInProps {
   switchForm: () => void;
@@ -32,7 +33,11 @@ export const SignIn: FC<ISignInProps> = memo(
     };
 
     return (
-      <Box boxShadow={3} sx={{ maxWidth: '400px', height: '100%' }}>
+      // <ThemeProvider theme={theme}>
+      <Box
+        boxShadow={3}
+        sx={{ maxWidth: '400px', height: '100%', bgcolor: 'white' }}
+      >
         <Box
           sx={{
             my: 8,
@@ -42,7 +47,7 @@ export const SignIn: FC<ISignInProps> = memo(
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: 'primary.main', color: 'white' }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -85,6 +90,7 @@ export const SignIn: FC<ISignInProps> = memo(
               fullWidth
               variant="contained"
               sx={{ mt: 2, mb: 2 }}
+              style={{ backgroundColor: theme.palette.primary.main }}
             >
               Войти
             </Button>
@@ -100,10 +106,10 @@ export const SignIn: FC<ISignInProps> = memo(
                 </Link>
               </Grid>
             </Box>
-            <Copyright sx={{ mt: 2 }} />
           </Box>
         </Box>
       </Box>
+      // </ThemeProvider>
     );
   },
 );

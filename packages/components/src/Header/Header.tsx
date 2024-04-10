@@ -1,66 +1,72 @@
 import { Avatar } from '@mui/material';
-import { FC, ForwardRefExoticComponent, ReactElement } from 'react';
+import React, { FC, ForwardRefExoticComponent, useMemo } from 'react';
 import {
   HeaderItem,
   HeaderItemWrapper,
   HeaderWrapper,
   LogoTitle,
   LogoWrapper,
-  Picture,
   UserControlButton,
   UserControlPanel,
+  WrapperIconSize,
 } from './Header.style';
 import { FontsGlobalStyle } from '../global.style';
+import Logo from '../Images/Logo';
+
+interface IMenuItemListProps {
+  title: string;
+  url: string;
+  Image: () => React.ReactElement;
+  selectSideMenu: string;
+}
 
 interface IHeaderProps {
-  menuItem: ForwardRefExoticComponent<any>;
-  menuItemList: { title: string; url: string }[];
+  menuItem: ForwardRefExoticComponent<any>; //может принимать ref и передавать его дочернему компоненту
+  menuItemList: IMenuItemListProps[];
 }
 
 export const Header: FC<IHeaderProps> = ({ menuItem, menuItemList }) => {
   const MenuItem = menuItem;
+
+  const centerSideMenu = useMemo(
+    () => menuItemList.filter((item) => item.selectSideMenu === 'center'),
+    [menuItemList],
+  );
+
+  const rightSideCenter = useMemo(
+    () => menuItemList.filter((item) => item.selectSideMenu === 'right'),
+    [menuItemList],
+  );
+
   return (
     <HeaderWrapper>
       <FontsGlobalStyle />
-      {/* <HeaderItem>Пункт меню</HeaderItem> */}
       <HeaderItemWrapper>
         <LogoWrapper>
-          <Picture src="/images/logo.svg"></Picture>
+          <WrapperIconSize>
+            <Logo />
+          </WrapperIconSize>
           <LogoTitle>Snappix</LogoTitle>
         </LogoWrapper>
       </HeaderItemWrapper>
       <HeaderItemWrapper>
-        {menuItemList.map((item) => (
-          <MenuItem to={item.url}>
-            <HeaderItem>
-              <Picture src="/images/home.svg"></Picture>
-            </HeaderItem>
-          </MenuItem>
+        {centerSideMenu.map(({ url, Image }) => (
+          <HeaderItem key={url}>
+            <MenuItem to={url}>
+              <Image></Image>
+            </MenuItem>
+          </HeaderItem>
         ))}
-        {/* <HeaderItem>
-          <Picture src="./images/home.svg"></Picture>
-        </HeaderItem>
-        <HeaderItem>
-          <Picture src="./images/video.svg"></Picture>
-        </HeaderItem>
-        <HeaderItem>
-          <Picture src="./images/store.svg"></Picture>
-        </HeaderItem>
-        <HeaderItem>
-          <Picture src="./images/followers.svg"></Picture>
-        </HeaderItem> */}
       </HeaderItemWrapper>
       <HeaderItemWrapper>
         <UserControlPanel>
-          <UserControlButton>
-            <Picture src="./images/menu.svg"></Picture>
-          </UserControlButton>
-          <UserControlButton>
-            <Picture src="./images/message.svg"></Picture>
-          </UserControlButton>
-          <UserControlButton>
-            <Picture src="./images/notification.svg"></Picture>
-          </UserControlButton>
+          {rightSideCenter.map(({ url, Image }) => (
+            <UserControlButton key={url}>
+              <MenuItem to={url}>
+                <Image />
+              </MenuItem>
+            </UserControlButton>
+          ))}
           <Avatar alt="Vikacus" src="./avatars/ava1.jpg" />
         </UserControlPanel>
       </HeaderItemWrapper>

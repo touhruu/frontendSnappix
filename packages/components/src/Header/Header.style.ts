@@ -1,19 +1,28 @@
 import styled from 'styled-components';
 
 export const HeaderWrapper = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 80px;
   background-color: #1d1d24;
   display: flex;
   justify-content: space-between;
   padding-right: 15px;
   padding-left: 15px;
+  border-bottom: 1px solid #343437;
 `;
 
 export const HeaderItemWrapper = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
+`;
+
+export const WrapperIconSize = styled.div`
+  display: flex;
+  width: 30px;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 `;
 
 export const LogoTitle = styled.p`
@@ -43,7 +52,10 @@ export const HeaderItem = styled.div`
 
   &:hover {
     filter: none;
-    border-bottom: 2px solid #7951c0;
+  }
+
+  &:has(.active) {
+    filter: none;
   }
 `;
 
@@ -69,5 +81,11 @@ export const UserControlButton = styled.div`
 
   * {
     max-width: 20px;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 `;

@@ -8,7 +8,6 @@ export const AuthPage = () => {
 
     const onSignInSubmit = (data: IAuthData) => {
         dispatch(fetchSignIn(data));
-        console.log(1111)
     }
 
     const onSignUpSubmit = (data: IRegistrationData) => {
@@ -18,7 +17,6 @@ export const AuthPage = () => {
     return (
         <Box sx={{
             display: 'flex',
-            height: '100vh',
             justifyContent: "center",
             alignItems: 'center',
         }}>

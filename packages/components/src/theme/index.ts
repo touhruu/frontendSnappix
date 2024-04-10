@@ -1,46 +1,35 @@
-import { createTheme } from '@mui/material';
-import { deepPurple, grey } from '@mui/material/colors';
+import { createTheme } from '@mui/material/styles';
+// import { createTheme } from '@mui/system';
+// import { deepPurple, grey } from '@mui/material/colors';
 
-declare module '@mui/material/styles' {
-  interface Palette {
-    vikakus: Palette['primary'];
-  }
-
-  interface PaletteOptions {
-    vikakus?: PaletteOptions['primary'];
-  }
-}
-
-declare module '@mui/material/Button' {
-  interface ButtonPropsColorOverrides {
-    vikakus: true;
-  }
-}
-
-export let theme = createTheme({});
-
-theme = createTheme(theme, {
+export const theme = createTheme({
   palette: {
-    vikakus: theme.palette.augmentColor({
-      color: {
-        main: deepPurple['500'],
-      },
-      name: 'primary',
-    }),
     primary: {
-      main: grey['500'],
+      main: '#673ab7',
     },
-    text: {
-      primary: grey['700'],
+    secondary: {
+      main: '#fff',
     },
-  },
-  shape: {
-    borderRadius: 8,
+    background: {
+      default: '#181820',
+      paper: '#1d1d24',
+    },
   },
   typography: {
-    button: {
-      fontFamily: 'sans-serif',
-      textTransform: 'none',
+    // body1: {
+    //   fontSize: 16,
+    //   color: '#ffffffb8',
+    //   // fontWeight: 'bold',
+    // },
+    // body2: {
+    //   fontSize: 28,
+    //   color: 'white',
+    //   fontWeight: 'initial',
+    // },
+    h3: {
+      fontSize: 20,
+      color: '#ffffffb8',
+      fontWeight: 'bold',
     },
   },
 });

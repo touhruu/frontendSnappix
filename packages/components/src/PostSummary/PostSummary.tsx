@@ -1,9 +1,3 @@
-import Avatar from '@mui/joy/Avatar';
-import Box from '@mui/joy/Box';
-import Card from '@mui/joy/Card';
-import CardContent from '@mui/joy/CardContent';
-import IconButton from '@mui/joy/IconButton';
-import Typography from '@mui/joy/Typography';
 import MoreHoriz from '@mui/icons-material/MoreHoriz';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import { Slider } from '../SliderPicture/SliderPicture';
@@ -11,9 +5,19 @@ import Checkbox from '@mui/material/Checkbox';
 import Favorite from '@mui/icons-material/Favorite';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
-import { colors } from '@mui/material';
-import { MessageIcon } from '../MessageIcon/MessageIcon';
-import { ReplyIcon } from '../ReplyIcon/ReplyIcon';
+import {
+  Box,
+  Card,
+  CardContent,
+  IconButton,
+  Typography,
+  colors,
+} from '@mui/material';
+import { theme } from '../theme';
+import { MessagePost } from '../Images/MessagePost';
+import { ReplyIcon } from '../Images/ReplyIcon';
+import { Avatar } from '../Avatar/Avatar';
+import { FC } from 'react';
 
 const imagePost = [
   'https://gamefans.ru/uploads/posts/2022-09/tower-of-fantasy-information-ruin-a-01.jpg',
@@ -21,7 +25,12 @@ const imagePost = [
   'http://squarefaction.ru/files/game/17000/gallery/20220427150221_a41c3b5d.jpg',
 ];
 
-export function PostSummary() {
+interface PostSummaryProps {
+  title: string;
+  body: string;
+}
+
+export const PostSummary: FC<PostSummaryProps> = ({ title, body }) => {
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
   return (
     <Card
@@ -29,46 +38,20 @@ export function PostSummary() {
       sx={{
         minWidth: 300,
         maxWidth: 650,
-        backgroundColor: '#1f1f27',
+        backgroundColor: theme.palette.background.paper,
         borderRadius: '12px',
         border: '1px solid #343437',
-        '--Card-radius': (theme) => theme.vars.radius.xs,
+        mb: 2,
       }}
     >
-      <CardContent
-        orientation="horizontal"
-        sx={{ alignItems: 'center', gap: 1 }}
-      >
-        <Box
-          sx={{
-            position: 'relative',
-            '&:before': {
-              content: '""',
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              bottom: 0,
-              right: 0,
-              m: '-2px',
-              borderRadius: '50%',
-              background:
-                'linear-gradient(45deg, #60ecfc 0%,#60ecfc 25%,#7951c0 50%,#7951c0 75%,#7951c0 100%)',
-            },
-          }}
-        >
-          <Avatar
-            size="sm"
-            src="/static/logo.png"
-            sx={{ p: 0.5, border: '2px solid', borderColor: 'background.body' }}
-          />
+      <CardContent sx={{ alignItems: 'center', gap: 1, display: 'flex' }}>
+        <Box position={'relative'}>
+          <Avatar miniature={true} />
         </Box>
         <Typography fontWeight="lg" sx={{ color: '#cfcfcf' }}>
-          Snappix
+          {title}
         </Typography>
         <IconButton
-          variant="plain"
-          color="neutral"
-          size="sm"
           sx={{
             ml: 'auto',
             color: colors.grey[500],
@@ -78,20 +61,20 @@ export function PostSummary() {
           <MoreHoriz />
         </IconButton>
       </CardContent>
-      <Typography sx={{ color: '#cfcfcf' }}>
-        My first post in Snappix...
+      <Typography sx={{ color: '#cfcfcf', pr: 2, pl: 2, pb: 1 }}>
+        {body}
       </Typography>
-      <Slider arrPicture={imagePost} />
-      <CardContent
-        orientation="horizontal"
-        sx={{ alignItems: 'center', mx: -1 }}
-      >
+      <Box pr={2} pl={2}>
+        <Slider arrPicture={imagePost} />
+      </Box>
+      <CardContent sx={{ display: 'flex', alignItems: 'center', mx: -1 }}>
         <Box sx={{ width: 0, display: 'flex', gap: 0.5 }}>
           <IconButton
-            variant="plain"
-            color="neutral"
-            size="sm"
-            sx={{ '&:hover': { backgroundColor: '#181820' } }}
+            sx={{
+              '&:hover': { backgroundColor: '#181820' },
+              width: 40,
+              height: 40,
+            }}
           >
             <Checkbox
               {...label}
@@ -100,18 +83,20 @@ export function PostSummary() {
             />
           </IconButton>
           <IconButton
-            variant="plain"
-            color="neutral"
-            size="sm"
-            sx={{ '&:hover': { backgroundColor: '#181820' } }}
+            sx={{
+              '&:hover': { backgroundColor: '#181820' },
+              width: 40,
+              height: 40,
+            }}
           >
-            <MessageIcon />
+            <MessagePost />
           </IconButton>
           <IconButton
-            variant="plain"
-            color="neutral"
-            size="sm"
-            sx={{ '&:hover': { backgroundColor: '#181820' } }}
+            sx={{
+              '&:hover': { backgroundColor: '#181820' },
+              width: 40,
+              height: 40,
+            }}
           >
             <ReplyIcon />
           </IconButton>
@@ -121,10 +106,11 @@ export function PostSummary() {
         />
         <Box sx={{ width: 0, display: 'flex', flexDirection: 'row-reverse' }}>
           <IconButton
-            variant="plain"
-            color="neutral"
-            size="sm"
-            sx={{ '&:hover': { backgroundColor: '#181820' } }}
+            sx={{
+              '&:hover': { backgroundColor: '#181820' },
+              width: 40,
+              height: 40,
+            }}
           >
             <Checkbox
               {...label}
@@ -136,4 +122,4 @@ export function PostSummary() {
       </CardContent>
     </Card>
   );
-}
+};

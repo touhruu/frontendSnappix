@@ -54,8 +54,11 @@ export const Slider: FC<IArrPictureProps> = ({ arrPicture }) => {
       )}
       <SliderPicture>
         <SliderPictureItem ref={sliderElement}>
-          {arrPicture.map((elem) => (
-            <BackgroundPictureItem style={{ backgroundImage: `url(${elem})` }}>
+          {arrPicture.map((elem, index) => (
+            <BackgroundPictureItem
+              key={index}
+              style={{ backgroundImage: `url(${elem})` }}
+            >
               <PictureWrapper>
                 <Picture src={elem} />
               </PictureWrapper>
@@ -71,9 +74,9 @@ export const Slider: FC<IArrPictureProps> = ({ arrPicture }) => {
       <Box display="flex" flexDirection="row" alignItems="center" mt={2}>
         {arrPicture.map((_, index) =>
           index === -currentSlideIndex ? (
-            <ActiveDot />
+            <ActiveDot key={index} />
           ) : (
-            <Dot onClick={switchSlide(index)} />
+            <Dot key={index} onClick={switchSlide(index)} />
           ),
         )}
       </Box>

@@ -9,25 +9,7 @@ import { IAuthData } from '../types/auth';
 import { SignUp } from '../SignUp/SignUp';
 import { IRegistrationData } from '../types/registration';
 
-function Copyright(props: any) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
-const defaultTheme = createTheme();
+// const defaultTheme = createTheme();
 
 interface IAuthFormProps {
   onSignInSubmit: (data: IAuthData) => void;
@@ -45,36 +27,37 @@ export const AuthForm: FC<IAuthFormProps> = ({
   }, []);
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    // <ThemeProvider theme={defaultTheme}>
+    <Box
+      sx={{
+        display: 'flex',
+        marginTop: '50px',
+        height: '550px',
+      }}
+    >
+      <CssBaseline />
       <Box
         sx={{
-          display: 'flex',
-          height: '650px',
+          width: '400px',
+          height: '100%',
+          backgroundColor: '#1d1d24',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
         }}
-      >
-        <CssBaseline />
-        <Box
-          sx={{
-            width: '400px',
-            height: '100%',
-            backgroundColor: 'blue',
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
+      />
+      {openRegForm ? (
+        <SignUp
+          switchForm={openRegistrationForm}
+          onSignUpSubmit={onSignUpSubmit}
         />
-        {openRegForm ? (
-          <SignUp
-            switchForm={openRegistrationForm}
-            onSignUpSubmit={onSignUpSubmit}
-          />
-        ) : (
-          <SignIn
-            switchForm={openRegistrationForm}
-            onSignInSubmit={onSignInSubmit}
-          />
-        )}
-      </Box>
-    </ThemeProvider>
+      ) : (
+        <SignIn
+          switchForm={openRegistrationForm}
+          onSignInSubmit={onSignInSubmit}
+        />
+      )}
+    </Box>
+    // </ThemeProvider>
   );
 };

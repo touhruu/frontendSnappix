@@ -19,5 +19,5 @@ export const userReducer = (state = initialState, action: UserAction): UserState
     }
 }
 
-export const setUsers = (payload:any) => ({type: UserActionTypes.FETCH_USERS_SUCCESS, payload})
-export const setUserError = (error:any) => ({type: UserActionTypes.FETCH_USERS_ERROR, error})
+export const setUsers = (payload: any) => ({type: UserActionTypes.FETCH_USERS_SUCCESS, payload})
+export const setUserError = (error: any) => ({type: UserActionTypes.FETCH_USERS_ERROR, error})
