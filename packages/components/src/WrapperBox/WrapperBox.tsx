@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { FC } from 'react';
 
-interface WrapperBoxProps {
+export interface WrapperBoxProps {
   children?: React.ReactNode;
   width?: string | number;
   maxWidth?: string | number;

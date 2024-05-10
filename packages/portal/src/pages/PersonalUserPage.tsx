@@ -1,5 +1,5 @@
 import { Box } from "@mui/material"
-import { AboutMe, CustomTabPanel, PostSummary, ProfileHeader, StoriesPersonalPage } from "@snappix/components";
+import { AboutMe, AlbumUser, CustomTabPanel, PostSummary, ProfileHeader, StoriesPersonalPage } from "@snappix/components";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { setTab } from "../store/reducers/tabReducer";
@@ -86,7 +86,7 @@ export const PersonalUserPage = () => {
                 Item Two
             </CustomTabPanel>
             <CustomTabPanel value={valueTab} index={3}>
-                Item Three
+                <AlbumUser />
             </CustomTabPanel>
             <CustomTabPanel value={valueTab} index={4}>
                 Item Four

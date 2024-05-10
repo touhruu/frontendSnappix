@@ -23,6 +23,7 @@ import { WrapperBox } from './WrapperBox/WrapperBox';
 import { StoriesPersonalPage } from './StoriesPersonalPage/StoriesPersonalPage';
 import { CustomTabPanel } from './CustomTabPanel/CustomTabPanel';
 import { ProfileHeader } from './ProfileHeader/ProfileHeader';
+import { AlbumUser } from './AlbumUsers/AlbumUser';
 
 export {
   AuthForm,
@@ -45,5 +46,6 @@ export {
   StoriesPersonalPage,
   CustomTabPanel,
   ProfileHeader,
+  AlbumUser,
 };
 export type { IAuthData, IRegistrationData };
